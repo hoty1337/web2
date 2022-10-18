@@ -41,6 +41,7 @@
     <tr>
         <td>
             <canvas id="graph" alt="график"></canvas>
+            <h4 id="err_msg"></h4>
         </td>
         <td>
             <form>
@@ -71,78 +72,79 @@
         let rCoord = 1;
         let cnvs = document.getElementById('graph');
         let ctx = cnvs.getContext('2d');
+        const h = 300, w = 300, xMax = 120, yMax = 120, gapSize = 5;
         cnvs.height = cnvs.width;
 
         ctx.lineWidth = 2;
-        ctx.moveTo(150,0);
-        ctx.lineTo(150,300);
+        ctx.moveTo(h / 2,0);
+        ctx.lineTo(h / 2, w);
         ctx.stroke();
-        ctx.moveTo(0, 150);
-        ctx.lineTo(300, 150);
+        ctx.moveTo(0, w / 2);
+        ctx.lineTo(h, w / 2);
         ctx.stroke();
         ctx.fillStyle = 'rgb(51,153,255)';
-        ctx.fillRect(150,150, 120, 120);
-        ctx.strokeRect(150,150, 120, 120);
+        ctx.fillRect(h / 2, w / 2, xMax, yMax);
+        ctx.strokeRect(h / 2, w / 2, xMax, yMax);
         ctx.beginPath();
-        ctx.moveTo(30, 150);
-        ctx.lineTo(150, 270);
-        ctx.lineTo(150, 150);
-        ctx.lineTo(30, 150);
+        ctx.moveTo(h / 2 - xMax, w / 2);
+        ctx.lineTo(h / 2, w / 2 + yMax);
+        ctx.lineTo(h / 2, w / 2);
+        ctx.lineTo(h / 2 - xMax, w / 2);
         ctx.closePath();
         ctx.stroke();
         ctx.fillStyle = 'rgb(51,153,255)';
         ctx.fill();
-        ctx.moveTo(150, 150);
-        ctx.arc(150, 150, 60, Math.PI, Math.PI * 1.5);
+        ctx.moveTo(h / 2, w / 2);
+        ctx.arc(h / 2, w / 2, xMax / 2, Math.PI, Math.PI * 1.5);
         ctx.fillStyle = 'rgb(51,153,255)';
         ctx.fill();
-        ctx.lineTo(150, 150);
+        ctx.lineTo(h / 2, w / 2);
         ctx.stroke();
 
         ctx.font = "14px Calibri";
         ctx.textAlign = "center";
         ctx.fillStyle = "black";
-        ctx.moveTo(150 + 60, 150 - 5);
-        ctx.lineTo(150 + 60, 150 + 5);
+        ctx.moveTo(h / 2 + xMax / 2, w / 2 - gapSize);
+        ctx.lineTo(h / 2 + xMax / 2, w / 2 + gapSize);
         ctx.stroke();
-        ctx.fillText("R/2", 150 + 60, 140);
-        ctx.moveTo(150 + 120, 150 - 5);
-        ctx.lineTo(150 + 120, 150 + 5);
+        ctx.fillText("R/2", h / 2 + xMax / 2, w / 2 - gapSize * 2);
+        ctx.moveTo(h / 2 + xMax, w / 2 - gapSize);
+        ctx.lineTo(h / 2 + xMax, w / 2 + gapSize);
         ctx.stroke();
-        ctx.fillText("R", 150 + 120, 140);
-        ctx.moveTo(150 - 60, 150 - 5);
-        ctx.lineTo(150 - 60, 150 + 5);
+        ctx.fillText("R", h / 2 + xMax, w / 2 - gapSize * 2);
+        ctx.moveTo(h / 2 - xMax / 2, w / 2 - gapSize);
+        ctx.lineTo(h / 2 - xMax / 2, w / 2 + gapSize);
         ctx.stroke();
-        ctx.fillText("-R/2", 150 - 60, 140);
-        ctx.moveTo(150 - 120, 150 - 5);
-        ctx.lineTo(150 - 120, 150 + 5);
+        ctx.fillText("-R/2", h / 2 - xMax / 2, w / 2 - gapSize * 2);
+        ctx.moveTo(h / 2 - xMax, w / 2 - gapSize);
+        ctx.lineTo(h / 2 - xMax, w / 2 + gapSize);
         ctx.stroke();
-        ctx.fillText("-R", 150 - 120, 140);
+        ctx.fillText("-R", h / 2 - xMax, w / 2 - gapSize * 2);
 
         ctx.textAlign = "left";
-        ctx.moveTo(150 - 5, 150 - 120);
-        ctx.lineTo(150 + 5, 150 - 120);
+        ctx.moveTo(h / 2 - gapSize, w / 2 - yMax);
+        ctx.lineTo(h / 2 + gapSize, w / 2 - yMax);
         ctx.stroke();
-        ctx.fillText("R", 160, 150 - 120);
-        ctx.moveTo(150 - 5, 150 - 60);
-        ctx.lineTo(150 + 5, 150 - 60);
+        ctx.fillText("R", h / 2 + gapSize * 2, w / 2 - yMax);
+        ctx.moveTo(h / 2 - gapSize, w / 2 - yMax / 2);
+        ctx.lineTo(h / 2 + gapSize, w / 2 - yMax / 2);
         ctx.stroke();
-        ctx.fillText("R/2", 160, 150 - 60);
-        ctx.moveTo(150 - 5, 150 + 60);
-        ctx.lineTo(150 + 5, 150 + 60);
+        ctx.fillText("R/2", h / 2 + gapSize * 2, w / 2 - yMax / 2);
+        ctx.moveTo(h / 2 - gapSize, w / 2 + yMax / 2);
+        ctx.lineTo(h / 2 + gapSize, w / 2 + yMax / 2);
         ctx.stroke();
-        ctx.fillText("-R/2", 160, 150 + 60);
-        ctx.moveTo(150 - 5, 150 + 120);
-        ctx.lineTo(150 + 5, 150 + 120);
+        ctx.fillText("-R/2", h / 2 + gapSize * 2, w / 2 + yMax / 2);
+        ctx.moveTo(h / 2 - gapSize, w / 2 + yMax);
+        ctx.lineTo(h / 2 + gapSize, w / 2 + yMax);
         ctx.stroke();
-        ctx.fillText("-R", 160, 150 + 120);
+        ctx.fillText("-R", h / 2 + gapSize * 2, w / 2 + yMax);
 
         function convertX(xTemp, rTemp) {
-            return 150 + xTemp * (120 / rTemp);
+            return h / 2 + xTemp * (xMax / rTemp);
         }
 
         function convertY(yTemp, rTemp) {
-            return 150 + -yTemp * (120 / rTemp);
+            return w / 2 + -yTemp * (yMax / rTemp);
         }
 
         function drawDotOnGraph(tx, ty, hit) {
@@ -163,14 +165,14 @@
             if (!isNaN(rCoord)) {
                 const x = getMousePosition(event).x;
                 const y = getMousePosition(event).y;
-                const trueX = Math.round((x - 150) * rCoord / 120 * 1000) / 1000;
-                const trueY = Math.round((y - 150) * -rCoord / 120 * 1000) / 1000;
+                const trueX = Math.round((x - h / 2) * rCoord / xMax * 1000) / 1000;
+                const trueY = Math.round((y - w / 2) * -rCoord / yMax * 1000) / 1000;
                 if(trueX < -5 || trueX > 3) {
-                    alert("x coord out of range [-5;3]");
+                    document.getElementById("err_msg").innerHTML = "Error: x coord out of range [-5;3]!";
                     return;
                 }
                 if(trueY < -3 || trueY > 3) {
-                    alert("y coord out of range [-3;3]");
+                    document.getElementById("err_msg").innerHTML = "Error: y coord out of range [-3;3]!";
                     return;
                 }
                 xCoord = trueX;
@@ -179,7 +181,7 @@
                 // console.log((y - 150) * -rCoord / 120);
                 window.location.replace("controller?x='"+xCoord+"'&y='"+yCoord+"'&r='"+rCoord+"'");
             } else {
-                alert("Error: R field is incorrect!")
+                document.getElementById("err_msg").innerHTML = "Error: R field is incorrect!";
             }
         });
 
