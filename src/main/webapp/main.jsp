@@ -1,5 +1,6 @@
-<%@ page import="data.Point" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="utils.AppUtils" %>
+<%@ page import="data.UserAccount" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -28,6 +29,13 @@
         img {
             border-radius: 90%;
         }
+        a {
+            color: greenyellow;
+            text-decoration: none;
+        }
+        a:hover {
+            color: forestgreen;
+        }
 
     </style>
 </head>
@@ -37,11 +45,12 @@
     <tr id="header">
         <th id="time" align="right"></th>
         <th colspan=2 align="left">Клименко Вячеслав P32081 Вар. 5432</th>
+        <th>${authorizedUser.username} <a href='logout'>Выйти</a></th>
     </tr>
     <tr>
         <td>
             <canvas id="graph" alt="график"></canvas>
-            <h4 id="err_msg"></h4>
+            <h4 id="err_msg">${errorMessage}</h4>
         </td>
         <td>
             <form>
